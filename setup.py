@@ -4,12 +4,12 @@ import carton
 
 
 setup(
-    name='django-carton',
+    name='django-carton-no-database',
     version=carton.__version__,
     description=carton.__doc__,
     packages=find_packages(),
-    url='http://github.com/lazybird/django-carton/',
-    author='lazybird',
+    url='https://github.com/julianogouveia/django-carton',
+    author='jgouveia',
     long_description=open('README.md').read(),
     include_package_data=True,
 )
