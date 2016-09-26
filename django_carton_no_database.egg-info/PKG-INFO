@@ -1,6 +1,6 @@
 Metadata-Version: 1.0
 Name: django-carton-no-database
-Version: 1.2.1
+Version: 1.2.2
 Summary: django-carton is a simple and lightweight application for shopping carts and wish lists.
 Home-page: https://github.com/julianogouveia/django-carton
 Author: jgouveia
