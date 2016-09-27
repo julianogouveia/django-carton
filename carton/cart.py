@@ -4,12 +4,13 @@ from carton import settings as carton_settings
 
 
 class CartItem:
-    def __init__(self, variant_id, image, name, quantity, price):
+    def __init__(self, variant_id, image, name, quantity, price, data={}):
         self.variant_id = variant_id
         self.image = image
         self.name = name
         self.quantity = int(quantity)
         self.price = Decimal(str(price))
+        self.data = data
 
     def __repr__(self):
         return 'Product variant ({})'.format(self.variant_id)
@@ -21,6 +22,7 @@ class CartItem:
             'name': self.name,
             'quantity': self.quantity,
             'price': str(self.price),
+            'data': self.data,
         }
 
     @property
@@ -42,7 +44,8 @@ class Cart:
                 item = cart_representation[variant_id]
 
                 self._items_dict[variant_id] = CartItem(
-                    item['variant_id'], item['image'], item['name'], item['quantity'], Decimal(item['price'])
+                    item['variant_id'], item['image'], item['name'], 
+                    item['quantity'], Decimal(item['price']), data=item['data']
                 )
 
     def __contains__(self, variant_id):
@@ -52,7 +55,7 @@ class Cart:
         self.session[self.session_key] = self.cart_serializable
         self.session.modified = True
 
-    def add(self, variant_id, image, name, price=None, quantity=1):
+    def add(self, variant_id, image, name, price=None, quantity=1, data={}):
         quantity = int(quantity)
 
         if quantity < 1:
@@ -63,7 +66,7 @@ class Cart:
         else:
             if price == None:
                 raise ValueError('Missing price when adding to cart')
-            self._items_dict[variant_id] = CartItem(variant_id, image, name, quantity, price)
+            self._items_dict[variant_id] = CartItem(variant_id, image, name, quantity, price, data=data)
 
         self.update_session()
 
