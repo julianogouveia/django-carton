@@ -71,9 +71,8 @@ class Cart:
         self.update_session()
 
     def remove(self, variant_id):
-        if variant_id in _items_dict:
-            del self._items_dict[product.pk]
-            self.update_session()
+        del self._items_dict[variant_id]
+        self.update_session()
 
     def remove_single(self, variant_id):
         if variant_id in self._items_dict:
